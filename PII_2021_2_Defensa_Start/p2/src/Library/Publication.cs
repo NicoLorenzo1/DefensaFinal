@@ -5,19 +5,24 @@ using System.Collections.ObjectModel;
 
 namespace Ucu.Poo.Defense
 {
-    public class Publication
+    public class Publication : IPublication
     {
         public DateTime EndDate { get; set; }
+        private IList<PublicationItem> items = new List<PublicationItem>();
 
-        public IReadOnlyCollection<PublicationItem> Items
+        public List<PublicationItem> Items
         {
             get
             {
-                return new ReadOnlyCollection<PublicationItem>(this.items);
+                return new List<PublicationItem>(this.items);
             }
         }
 
-        private IList<PublicationItem> items = new List<PublicationItem>();
+        public IList<PublicationItem> Item { get; private set; }
+        public Material Material { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Quantity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Price { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int SubTotal { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Publication(DateTime endDate)
         {
@@ -32,6 +37,10 @@ namespace Ucu.Poo.Defense
         public void RemoveItem(PublicationItem item)
         {
             this.items.Remove(item);
+        }
+        public string TextoImprimir(DateTime endDate, PublicationItem items)
+        {
+            return $"{Quantity} + {items} + {endDate} + a $ + {Price}";
         }
     }
 }
