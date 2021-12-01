@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 
 namespace Ucu.Poo.Defense.Tests
 {
@@ -17,14 +18,14 @@ namespace Ucu.Poo.Defense.Tests
         [Test]
         public void TestCreateNonDangerousMaterial()
         {
-            Material material = new Material("Non dangerous material", nonDangerousType);
+            Material material = new("Non dangerous material", nonDangerousType, false);
             Assert.That(material.IsDangerous, Is.False);
         }
 
         [Test]
         public void TestCreateDangerousMaterial()
         {
-            Material material = new Material("Dangerous material", dangerousType);
+            Material material = new("Dangerous material", dangerousType, true);
 
             Assert.That(material.IsDangerous, Is.True);
 
